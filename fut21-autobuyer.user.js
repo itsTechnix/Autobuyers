@@ -4,7 +4,6 @@
 // @name         FUT21 Autobuyer
 // @namespace    http://tampermonkey.net/
 // @version      1.4.3
-// @updateURL    https://github.com/Thijmen-Stegenga/AutoBuyer-itsTechnix
 // @description  FUT21 Autobuyer
 // @author       itsTechnix
 // @match        https://www.easports.com/uk/fifa/ultimate-team/web-app/*
