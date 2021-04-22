@@ -17,6 +17,32 @@
         return Math.round((Math.random() * (max - min) + min) / 1000) * 1000;
     };
 
+    window.old = {
+        'utils': {
+            'JS': {
+                'inherits': function inherits(t, i) {
+                    t.prototype = Object.create(i.prototype), Object.defineProperty(t.prototype, "constructor", {
+                        value: t,
+                        writable: !1,
+                        enumerable: !1
+                    }), t.superClass_ = i.prototype
+                }
+            }
+        },
+        'enums': {
+            'SearchType': {
+                ANY: "any",
+                BALL: "ball",
+                CLUB_INFO: "clubInfo",
+                CONSUMABLES_DEVELOPMENT: "development",
+                CONSUMABLES_TRAINING: "training",
+                PLAYER: "player",
+                STADIUM: "stadium",
+                STAFF: "staff"
+            }
+        }
+    };
+
     window.searchCount = 0;
     window.profit = 0
 
@@ -80,7 +106,7 @@
 
         var searchCriteria = getAppMain().getRootViewController().getPresentedViewController().getCurrentViewController().getCurrentController()._viewmodel.searchCriteria;
 
-        searchCriteria.maxBid = window.getMaxSearchBid(300000, 800000);  
+        searchCriteria.maxBid = window.getMaxSearchBid(300000, 800000);
 
         services.Item.clearTransferMarketCache();
 
@@ -234,13 +260,13 @@
         window.notify('Autobuyer Stopped');
     }
 
-    utils.JS.inherits(UTAutoBuyerViewController, UTMarketSearchFiltersViewController)
+    window.old.utils.JS.inherits(UTAutoBuyerViewController, UTMarketSearchFiltersViewController)
     window.UTAutoBuyerViewController.prototype.init = function init() {
         if (!this.initialized) {
             //getAppMain().superclass(),
             this._viewmodel || (this._viewmodel = new viewmodels.BucketedItemSearch),
-                this._viewmodel.searchCriteria.type === enums.SearchType.ANY && (this._viewmodel.searchCriteria.type = enums.SearchType.PLAYER);
-            var count = 16;
+                this._viewmodel.searchCriteria.type === window.old.enums.SearchType.ANY && (this._viewmodel.searchCriteria.type = window.old.enums.SearchType.PLAYER);
+            var count = UTTransferMarketPaginationViewModel.prototype.getNumItemsPerPage() + 1;
             this._viewmodel.searchCriteria.count = count,
                 this._viewmodel.searchFeature = enums.ItemSearchFeature.MARKET;
             var view = this.getView();
